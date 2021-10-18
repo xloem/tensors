@@ -2,7 +2,8 @@ import torch
 
 from torch import (
     tensor,
-    Tensor
+    einsum,
+    Tensor,
 )
 from torch.utils import (
     dlpack

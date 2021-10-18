@@ -1,7 +1,8 @@
 import jaxlib
 
 from jax.numpy import (
-    array as tensor
+    array as tensor,
+    einsum,
 )
 from jax import (
     dlpack
