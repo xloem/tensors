@@ -3,46 +3,19 @@ import tensors.jax, tensors.torch
 TENSOR_CLASS_BACKENDS = {}
 
 def get_backend(tensor):
+    '''
+    Get the backend module for a tensor.
+
+    :param tensor: tensor to find backend for
+    :returns: backend module
+    '''
     return TENSOR_CLASS_BACKENDS[type(tensor)]
 
-#def backend_common(backend):
-#    TENSOR_CLASSES = []
-#
-#    def is_backend(tensor):
-#        '''
-#        Identify whether a tensor belongs to this backend.
-#
-#        :param tensor: tensor to check
-#        :returns: True if the tensor belongs to this backend
-#        '''
-#        for cls in backend.TENSOR_CLASSES:
-#            if isinstance(tensor, cls):
-#                return True
-#        return False
-#
-#    def to_backend(tensor):
-#        '''
-#        Convert a tensor to this backend
-#
-#        :param tensor: tensor to convert
-#        :returns: tensor in backend-specific format
-#        '''
-#        # dlpack is a universal tensor interchangen standard
-#        dlpack = get_backend(tensor).dlpack.to_dlpack(tensor)
-#        return backend.dlpack.from_dlpack(dlpack)
-#
-#    return locals()
-
 for backend in tensors.jax, tensors.torch:
-    TENSOR_CLASS_BACKENDS.update({cls : backend for cls in backend.TENSOR_CLASSES})
+    TENSOR_CLASS_BACKENDS[backend.Tensor] = backend
+    for member in dir(backend):
+        if backend.name in member and backend.name != member:
+            locals()[member] = getattr(backend, member)
 
-#    for name, common in backend_common(backend).items():
-#        if not hasattr(backend, name):
-#            # provide common item if it is not implemented
-#            setattr(backend, name, common)
-#        else:
-#            impl = getattr(backend, name)
-#            if hasattr(common, '__doc__'):
-#                # provide documentation if it is implemented without docs
-#                if not hasattr(impl, '__doc__'):
-#                    impl.__doc__ = common.__doc__
+# ensures manually added functions are listed in documentation
+__all__ = list(locals().keys())

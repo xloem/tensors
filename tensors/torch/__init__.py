@@ -1,13 +1,12 @@
 import torch
 
 from torch import (
-    tensor
+    tensor,
+    Tensor
 )
 from torch.utils import (
     dlpack
 )
-
-TENSOR_CLASSES = [torch.Tensor]
 
 
 from .. import _backend
