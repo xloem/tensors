@@ -1,6 +1,8 @@
-import tensors.jax, tensors.torch
 
-TENSOR_CLASS_BACKENDS = {}
+import tensors.jax, tensors.torch
+backends = [tensors.jax, tensors.torch]
+
+backends_by_tensor_class = {}
 
 def get_backend(tensor):
     '''
@@ -9,10 +11,10 @@ def get_backend(tensor):
     :param tensor: tensor to find backend for
     :returns: backend module
     '''
-    return TENSOR_CLASS_BACKENDS[type(tensor)]
+    return backends_by_tensor_class[type(tensor)]
 
-for backend in tensors.jax, tensors.torch:
-    TENSOR_CLASS_BACKENDS[backend.Tensor] = backend
+for backend in backends:
+    backends_by_tensor_class[backend.Tensor] = backend
     for member in dir(backend):
         if backend.name in member and backend.name != member:
             locals()[member] = getattr(backend, member)
