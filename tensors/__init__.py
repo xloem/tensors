@@ -9,11 +9,23 @@ def get_backend(tensor):
     :returns: backend module
     '''
     Tensor = type(tensor)
+    # first see if it's quickly available
     try:
         return _backend.backends_by_tensor_class[Tensor]
     except:
-        _backend.load_new_backends()
+        pass
+
+    # now load new things, try more
+    _backend.load_new_backends()
+    try:
         return _backend.backends_by_tensor_class[Tensor]
+    except:
+        pass
+    for cls, backend in _backend.backends_by_tensor_class.items():
+        if issubclass(Tensor, cls):
+            _backend.backends_by_tensor_class[Tensor] = backend
+            return backend
+    raise
 
 locals().update(_backend.get_global_stubs())
 
