@@ -1,8 +1,10 @@
-backend_names = set(('jax', 'torch'))
+backend_names = set(('jax', 'tensorflow', 'torch'))
 
 def load_backend_by_name(name : str):
     if name == 'jax':
         import tensors.jax as backend
+    elif name == 'tensorflow':
+        import tensors.tensorflow as backend
     elif name == 'torch':
         import tensors.torch as backend
     else:
@@ -88,7 +90,7 @@ def common_members(
         dlpack_tensor = get_backend(foreign_tensor).dlpack.to_dlpack(foreign_tensor)
         return dlpack.from_dlpack(dlpack_tensor)
 
-    tensor_backend = tensor
+    backend_tensor = tensor
 
     return locals()
 
