@@ -103,6 +103,57 @@ def backend_doc(name):
         return func
     return mutate_doc
 
+def rename_kws(locals, func_names, **kwparams):
+    import inspect
+    import re
+
+    dflts = {}
+    # let src=default set manual defaults
+    for src, dflt in [*kwparams.items()]:
+        if src in kwparams.values():
+            dflts[src] = dflt
+            del kwparams[src]
+    src_by_dst = kwparams
+    dst_by_src = {src:dst for dst,src in src_by_dst.items()}
+
+    # it's possible more things can be pulled out of the below loop
+    for func_name in func_names.split(' '):
+        func = locals[func_name]
+
+        # update defaults to match function documentation if reasonable to do so
+        func_dflts = {**dflts}
+        try:
+            sig = inspect.signature(func)
+            for src, param in sig.parameters.items():
+                func_dflts[src] = param.default
+        except:
+            sig = None
+
+        # make a list of kwparam mutations with defaults
+        map = [(src, dst, func_dflts[src]) for dst, src in src_by_dst.items()]
+
+        # wrapper function
+        def mutated(*params, **kwparams):
+            for src, dst, dflt in map:
+                kwparams[src] = kwparams.pop(dst, dflt)
+            return func(*params, **kwparams)
+
+        # update metadata of wrapper function for docs etc
+        mutated.__name__ = func_name
+        if sig is not None:
+            # replace parameter names in signature
+            mutated.__signature__ = sig.replace(parameters=[
+                param.replace(name=dst_by_src[param.name])
+                    if param.name in dst_by_src
+                    else param
+                for param in sig.parameters.values()
+            ])
+        for dst, src in kwparams.items():
+            mutated.__doc__ = re.sub(src + '([^a-zA-Z_])', dst + '\\1', func.__doc__)
+
+        # replace func with mutated
+        locals[func_name] = mutated
+
 def add_common_members(locals : dict):
     '''
     Add common members to a backend.
