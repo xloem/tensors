@@ -1,9 +1,11 @@
-import torch
+import torch as framework
 
 from torch import (
     tensor,
-    einsum,
     Tensor,
+
+    argmax,
+    einsum,
 )
 from torch.utils import (
     dlpack

@@ -1,4 +1,4 @@
-import tensorflow
+import tensorflow as framework
 
 from tensorflow import (
     constant as tensor,

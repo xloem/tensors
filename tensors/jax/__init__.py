@@ -1,7 +1,10 @@
+import jax as framework
 import jaxlib
 
 from jax.numpy import (
     array as tensor,
+
+    argmax,
     einsum,
 )
 from jax import (
