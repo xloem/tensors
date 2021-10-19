@@ -2,8 +2,11 @@ import tensorflow as framework
 
 from tensorflow import (
     constant as tensor,
+    Tensor,
+
+    argmax,
     einsum,
-    Tensor
+    stack,
 )
 from tensorflow.experimental import (
     dlpack

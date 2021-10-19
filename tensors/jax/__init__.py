@@ -6,6 +6,7 @@ from jax.numpy import (
 
     argmax,
     einsum,
+    stack,
 )
 from jax import (
     dlpack

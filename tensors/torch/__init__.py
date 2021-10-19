@@ -6,6 +6,7 @@ from torch import (
 
     argmax,
     einsum,
+    stack,
 )
 from torch.utils import (
     dlpack
