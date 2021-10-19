@@ -8,6 +8,9 @@ from tensorflow import (
     einsum,
     stack,
 )
+from tensorflow.nn import (
+    softmax,
+)
 from tensorflow.experimental import (
     dlpack
 )

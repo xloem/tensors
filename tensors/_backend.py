@@ -133,10 +133,13 @@ def rename_kws(locals, func_names, **kwparams):
         map = [(src, dst, func_dflts[src]) for dst, src in src_by_dst.items()]
 
         # wrapper function
-        def mutated(*params, **kwparams):
-            for src, dst, dflt in map:
-                kwparams[src] = kwparams.pop(dst, dflt)
-            return func(*params, **kwparams)
+        def make_wrapper(func, map):
+            def mutated(*params, **kwparams):
+                for src, dst, dflt in map:
+                    kwparams[src] = kwparams.pop(dst, dflt)
+                return func(*params, **kwparams)
+            return mutated
+        mutated = make_wrapper(func, map)
 
         # update metadata of wrapper function for docs etc
         mutated.__name__ = func_name

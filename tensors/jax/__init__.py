@@ -8,6 +8,9 @@ from jax.numpy import (
     einsum,
     stack,
 )
+from jax.nn import (
+    softmax
+)
 from jax import (
     dlpack
 )
