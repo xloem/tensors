@@ -6,6 +6,7 @@ from tensorflow import (
 
     argmax,
     einsum,
+    concat,
     stack,
 )
 from tensorflow.nn import (

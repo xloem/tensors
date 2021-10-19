@@ -5,6 +5,7 @@ from torch import (
     Tensor,
 
     argmax,
+    cat as concat,
     stack,
     einsum,
 )
@@ -18,6 +19,6 @@ from torch.utils import (
 
 from .. import _backend
 
-_backend.rename_kws(locals(), 'argmax stack softmax', axis='dim', dim=0)
+_backend.rename_kws(locals(), 'argmax concat stack softmax', axis='dim', dim=0)
 
 _backend.add_common_members(locals())

@@ -6,6 +6,7 @@ from jax.numpy import (
 
     argmax,
     einsum,
+    concatenate as concat,
     stack,
 )
 from jax.nn import (
