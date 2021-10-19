@@ -16,6 +16,9 @@ def load_backend_by_name(name : str):
 backends_by_name = {}
 backends_by_tensor_class = {}
 
+def load_all_backends():
+    return [load_backend_by_name(name) for name in backend_names]
+
 def register(backend):
     '''
     Registers a backend after it is loaded.
