@@ -4,10 +4,13 @@ import jaxlib
 from jax.numpy import (
     array as tensor,
 
-    argmax,
-    einsum,
+    arange,
+
     concatenate as concat,
     stack,
+
+    argmax,
+    einsum,
 )
 from jax.nn import (
     softmax

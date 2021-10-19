@@ -4,10 +4,13 @@ from tensorflow import (
     constant as tensor,
     Tensor,
 
-    argmax,
-    einsum,
+    range as arange,
+
     concat,
     stack,
+
+    argmax,
+    einsum,
 )
 from tensorflow.nn import (
     softmax,
