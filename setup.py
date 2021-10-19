@@ -14,7 +14,7 @@ setuptools.setup(
     ],
     install_requires = [],
     extras_require = {
-        'all': [ 'torch', 'jax' ],
+        'all': [ 'torch', 'jax', 'tensorflow' ],
     },
-    packages = ['tensors'],
+    packages = setuptools.find_packages(),
 )
