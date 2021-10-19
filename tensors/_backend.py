@@ -25,20 +25,22 @@ def register(backend):
 
     import tensors
 
-    #setattr(tensors.tensor, backend.name, backend.tensor)
     try:
         tensors.__all__.extend(backend.name)
     except Exception:
         # still importing
         pass
 
-    for member in dir(backend):
-        if backend.name in member and backend.name != member:
-            setattr(tensors, member, getattr(backend, member))
+    for name in dir(backend):
+        member = getattr(backend, name)
+        if backend.name in name and backend.name != name:
+            setattr(tensors, name, member)
 
 def set_default(backend):
+    import sys
     import tensors
     tensors.default = backend
+    sys.modules['tensors.default'] = tensors.default
     #for name, member in backend.__dict__.items():
     #    if name[0] != '_' and callable(member):
     #        setattr(tensors, name, member)
