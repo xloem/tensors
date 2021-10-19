@@ -27,6 +27,28 @@ def get_backend(tensor):
             return backend
     raise
 
+def shape(object):
+    '''
+    Get a shape tuple for tensors, arrays, tuples, dicts.
+
+    :param object: The collection to find the shape of.
+    :returns: tuple shape
+    '''
+    try:
+        return object.shape
+    except:
+        if type(object) is dict:
+            object = [*object.values()]
+        if type(object) in (tuple, list):
+            try:
+                dims = [shape(item) for item in object]
+                if all((dim == dims[0] for dim in dims)):
+                    return (len(object), *dims[0])
+                else:
+                    return (len(object),)
+            except:
+                return (len(object),)
+
 locals().update(_backend.get_global_stubs())
 
 _backend.load_new_backends()
