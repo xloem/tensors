@@ -19,6 +19,11 @@ from jax import (
     dlpack
 )
 
+def hwaccel_present() -> bool:
+    '''Returns a bool indicating whether GPU/TPU use is available.'''
+    # jax always prefers to connect to an accelerator if there is one
+    return framework.default_backend() != 'cpu'
+
 Tensor = jaxlib.xla_extension.DeviceArray
 
 from .. import _backend

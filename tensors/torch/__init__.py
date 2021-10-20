@@ -1,5 +1,9 @@
 import torch as framework
 
+from torch.cuda import (
+    is_available as hwaccel_present
+)
+
 from torch import (
     tensor,
     Tensor,

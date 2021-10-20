@@ -62,12 +62,41 @@ def load_new_backends():
     new_backends = [load_backend_by_name(name) for name in new_backends]
     return new_backends
 
+def clone_basic(member, globals):
+    import types
+    if type(member) is types.FunctionType:
+        instance = types.FunctionType(member.__code__, globals, member.__name__, member.__defaults__, member.__closure__)
+        instance.__annotations__ = member.__annotations__
+        instance.__dict__ = {**member.__dict__}
+        instance.__doc__ = member.__doc__
+        instance.__kwdefaults__ = member.__kwdefaults__
+        # is something else needed if it's a class function?
+    elif type(member) is type:
+        instance = type(
+            member.__name__,
+            (*member.__bases__,member),
+            { name: clone_basic(member, globals) for name, member in member.__dict__.items() }
+        )
+    else:
+        instance = member
+    return instance
+
+def module_inherit(globals, supermodule):
+    for name, member in supermodule.__dict__:
+        if name == '__all__':
+            __all__ = globals.get(name, globals)
+            __all__ = list(set(__all__) | set(member))
+            globals['__all__'] = __all__
+        elif name not in globals:
+            globals[name] = clone_basic(member, globals)
+
 def common_members(
         Tensor : type,
         tensor : callable,
         dlpack,
+        hwaccel_present : callable,
         __name__ : str = '',
-         **kw
+        **kw
     ) -> dict:
     '''
     Define and return common members for backend modules.
@@ -90,10 +119,26 @@ def common_members(
         '''
         Convert a tensor to this backend
         '''
-        from . import get_backend
+        from . import get_backend, _dlpack
         # dlpack is a universal tensor interchangen standard
-        dlpack_tensor = get_backend(foreign_tensor).dlpack.to_dlpack(foreign_tensor)
-        return dlpack.from_dlpack(dlpack_tensor)
+        foreign_backend = get_backend(foreign_tensor)
+        dlpack_tensor = foreign_backend.dlpack.to_dlpack(foreign_tensor)
+
+        try:
+            return dlpack.from_dlpack(dlpack_tensor)
+        except Exception as exception:
+            if not hwaccel_present():
+                # if the foreign tensor is on a gpu
+                # and the destination backend doesn't have access to hardware acceleration
+                # it will need to be downloaded to the cpu
+                dlpack_cptr = _dlpack.ctypes.cast(_dlpack.PyCapsule_GetPointer(dlpack_tensor, b'dltensor'), _dlpack.ctypes.POINTER(_dlpack.DLManagedTensor))
+                dtype = dlpack_cptr.contents.dl_tensor.ctx.device_type
+                if not (dtype.value & dtype.kDLCPU):
+                    import warnings
+                    warnings.warn('Copy tensor from ' + foreign_backend.name + ' GPU to ' + name + ' CPU.')
+                    dlpack_tensor = foreign_backend.dlpack.to_dlpack(foreign_tensor.clone().cpu())
+                    return dlpack.from_dlpack(dlpack_tensor)
+            raise
 
     backend_tensor = tensor
 
@@ -193,7 +238,7 @@ def get_global_stubs():
             func = getattr(backend, function_name)
             return func(*params, **kwparams)
         return wrapper
-    for name in common_members(None, None, None):
+    for name in common_members(None, None, None, None):
         if 'backend' in name:
             for backend_name in backend_names:
                 backend_func_name = name.replace('backend', backend_name)
