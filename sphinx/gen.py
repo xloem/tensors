@@ -87,7 +87,9 @@ class Builder(sphinx.builders.Builder):
                         else:
                             break
                 elif self.node_has_name(node, lambda name: name.startswith('function-')):
-                    self.write_stub(output, '', node[0].astext(), doctree, *node[1:])
+                    sig = node[0].astext()
+                    if '(' in sig:
+                        self.write_stub(output, '', sig, doctree, *node[1:])
                 elif self.node_has_name(node, lambda name: name.endswith('-object')):
                     object_name = node[0].astext().split(' ')[0]
                     write = self.WritingObject(self, output, doctree, object_name)
