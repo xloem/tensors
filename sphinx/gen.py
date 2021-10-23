@@ -12,6 +12,7 @@ class RstTranslatorTweak(RstTranslator):
         raise docutils.nodes.SkipNode
 
     # skips id labels
+    # if the source of RstTranslator.visit_target is viewed, it is also possible to skip target output via minor document mutation
     def visit_target(self, node):
         raise docutils.nodes.SkipNode
 
@@ -76,7 +77,15 @@ class Builder(sphinx.builders.Builder):
                     else:
                         const_example = const_name + ' = float("' + const_name + '")'
                     output.write(const_example + '\n')
-                    output.write('"""' + const_descr + '"""\n\n')
+                    output.write('"""' + self.node_to_rst(doctree, node).strip() + '"""\n\n')
+                elif self.node_has_name(node, lambda name: name == 'data-types'):
+                    for section in node.traverse(docutils.nodes.section, include_self=False):
+                        dt_name = section[0].astext()
+                        if ' ' not in dt_name:
+                            output.write(dt_name + ' = NotImplemented\n')
+                            output.write('"""' + self.node_to_rst(doctree, section) + '"""\n\n')
+                        else:
+                            break
                 elif self.node_has_name(node, lambda name: name.startswith('function-')):
                     self.write_stub(output, '', node[0].astext(), doctree, *node[1:])
                 elif self.node_has_name(node, lambda name: name.endswith('-object')):
