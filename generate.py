@@ -31,6 +31,7 @@ class Renderer(mistletoe.base_renderer.BaseRenderer):
         return result
     def add_footer(self):
         if self.cur_obj_type is not None:
+            self.last_obj_type, self.last_obj_name = self.cur_obj_type, self.cur_obj_name
             self.cur_obj_type, self.cur_obj_name = None, None
             self.footnotes.append(self.doc_quotes + '\n' + self.single_indentation + 'raise NotImplemented\n\n')
     def set_indent(self, amnt):
@@ -54,19 +55,19 @@ class Renderer(mistletoe.base_renderer.BaseRenderer):
     def render_heading(self, token):
         if self.cur_obj_name is not None:
             text = self.render_footnotes()
-            content = self.render_inner(token)
-            if content.startswith(self.cur_obj_name):
+            self.heading = self.render_inner(token)
+            if self.heading.startswith(self.cur_obj_name):
                 self.cur_obj_depth = token.level
                 self.set_indent(token.level)
                 text += dict(
                     function='def '
-                )[self.cur_obj_type] + content + ':'
+                )[self.cur_obj_type] + self.heading + ':'
 
                 self.bump_indent()
                 self.opening_quotes = True
             else:
                 self.set_indent(token.level)
-                text += '\n\n' + self.indentation + content + '\n'
+                text += '\n\n' + self.indentation + self.heading + '\n'
             return text
         else:
             return ''
@@ -86,24 +87,26 @@ class Renderer(mistletoe.base_renderer.BaseRenderer):
         return self.render_inner(token)
     def render_paragraph_text(self, text):
         if text[0] == '(' and text[-2:] == ')=':
-            self.add_footer()
-            self.cur_obj_type, self.cur_obj_name = text[1:-2].split('-')
-        elif self.cur_obj_type is not None:
-            if text[:4] == ':::{' and text[-3:] == ':::' and text[text.index('\n')-1] == '}':
-                tagidx = text.index('\n')
-                tag = text[4:tagidx - 1]
-                text = tag + ':\n' + text[tagidx+1:-3].strip()
-            lines = text.split('\n')
-            if self.opening_quotes:
-                lines[0] = self.doc_quotes + lines[0]
-            lines = [self.indentation + line for line in lines]
-            text = '\n' + '\n'.join(lines)
-            if self.opening_quotes:
-                self.opening_quotes = False
-            #else:
-            #    text = '\n' + text
-            return text
-        return ''
+            if '-' in text:
+                self.add_footer()
+                self.cur_obj_type, self.cur_obj_name = text[1:-2].split('-')
+                return ''
+            else:
+                text = '\n' + text[1:-2] + '\n'
+        if text[:4] == ':::{' and text[-3:] == ':::' and text[text.index('\n')-1] == '}':
+            tagidx = text.index('\n')
+            tag = text[4:tagidx - 1]
+            text = tag + ':\n' + text[tagidx+1:-3].strip()
+        lines = text.split('\n')
+        if self.opening_quotes:
+            lines[0] = self.doc_quotes + lines[0]
+        lines = [self.indentation + line for line in lines]
+        text = '\n' + '\n'.join(lines)
+        if self.opening_quotes:
+            self.opening_quotes = False
+        #else:
+        #    text = '\n' + text
+        return text
     def render_block_code(self, token):
         return self.render_paragraph_text(':::' + token.language + '\n' + self.render_inner(token) + ':::')
         return self.render_paragraph(token)
@@ -122,6 +125,8 @@ class Renderer(mistletoe.base_renderer.BaseRenderer):
         return token.content.replace('&lt;','<').replace('&gt;','>')
     def render_line_break(self, token):
         return '\n'
+    def render_thematic_break(self, token):
+        return '\n\n'
 
 #class md2py(mistletoe.base_renderer.BaseRenderer):
 #    def __init__(self, inner_renderer):
@@ -205,11 +210,16 @@ class Renderer(mistletoe.base_renderer.BaseRenderer):
 #    for elem in doc.children:
 #        if type(
 
-with open(os.path.join(spec_dir, fn)) as fin:
-    doc = mistletoe.Document(fin)
-    renderer = Renderer()
-    with renderer:
-        print(renderer.render(doc))
+renderer = Renderer()
+def parse(fn):
+    global doc
+    with open(os.path.join(spec_dir, fn)) as fin:
+        doc = mistletoe.Document(fin)
+        with renderer:
+            print(renderer.render(doc))
+
+parse('array_object.md')
+parse(fn)
 #    with md2py(
 #    rendered = mistletoe.markdown(fin, md2py)
 #    print(rendered)
