@@ -2,107 +2,107 @@ class Array:
 
     def __iadd__(self, other):
         """``+=``. May be implemented via ``__iadd__``."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __isub__(self, other):
         """``-=``. May be implemented via ``__isub__``."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __imul__(self, other):
         """``*=``. May be implemented via ``__imul__``."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __itruediv__(self, other):
         """``/=``. May be implemented via ``__itruediv__``."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __ifloordiv__(self, other):
         """``//=``. May be implemented via ``__ifloordiv__``."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __ipow__(self, other):
         """``**=``. May be implemented via ``__ipow__``."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __imatmul__(self, other):
         """``@=``. May be implemented via ``__imatmul__``."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __imod__(self, other):
         """``%=``. May be implemented via ``__imod__``."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __iand__(self, other):
         """``&=``. May be implemented via ``__iand__``."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __ior__(self, other):
         """``|=``. May be implemented via ``__ior__``."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __ixor__(self, other):
         """``^=``. May be implemented via ``__ixor__``."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __ilshift__(self, other):
         """``<<=``. May be implemented via ``__ilshift__``."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __irshift__(self, other):
         """``>>=``. May be implemented via ``__irshift__``."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __radd__(self, other):
         """``__radd__``"""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __rsub__(self, other):
         """``__rsub__``"""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __rmul__(self, other):
         """``__rmul__``"""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __rtruediv__(self, other):
         """``__rtruediv__``"""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __rfloordiv__(self, other):
         """``__rfloordiv__``"""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __rpow__(self, other):
         """``__rpow__``"""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __rmatmul__(self, other):
         """``__rmatmul__``"""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __rmod__(self, other):
         """``__rmod__``"""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __rand__(self, other):
         """``__rand__``"""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __ror__(self, other):
         """``__ror__``"""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __rxor__(self, other):
         """``__rxor__``"""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __rlshift__(self, other):
         """``__rlshift__``"""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __rrshift__(self, other):
         """``__rrshift__``"""
-        raise NotImplemented
+        raise NotImplementedError
 
     @property
     def dtype(self):
@@ -118,7 +118,7 @@ class Array:
         *   **out**: *<dtype>*
         
             *   array data type."""
-        raise NotImplemented
+        raise NotImplementedError
 
     @property
     def device(self):
@@ -134,7 +134,7 @@ class Array:
         *   **out**: *<device>*
         
             *   a ``device`` object (see device-support)."""
-        raise NotImplemented
+        raise NotImplementedError
 
     @property
     def mT(self):
@@ -157,7 +157,7 @@ class Array:
                 having shape ``(..., M, N)``, the returned array must have
                 shape ``(..., N, M)``). The returned array must have the same
                 data type as the original array."""
-        raise NotImplemented
+        raise NotImplementedError
 
     @property
     def ndim(self):
@@ -176,7 +176,7 @@ class Array:
         
         *TODO: need to more carefully consider this in order to accommodate,
         e.g., graph tensors where the number of dimensions may be dynamic.*"""
-        raise NotImplemented
+        raise NotImplementedError
 
     @property
     def shape(self):
@@ -197,7 +197,7 @@ class Array:
         
         *TODO: need to more carefully consider this in order to accommodate,
         e.g., graph tensors where a shape may be dynamic.*"""
-        raise NotImplemented
+        raise NotImplementedError
 
     @property
     def size(self):
@@ -217,7 +217,7 @@ class Array:
         
         *TODO: need to more carefully consider this in order to accommodate,
         e.g., graph tensors where the number of elements may be dynamic.*"""
-        raise NotImplemented
+        raise NotImplementedError
 
     @property
     def T(self):
@@ -248,7 +248,7 @@ class Array:
                 are permuted in reverse order relative to original array. The
                 returned array must have the same data type as the original
                 array."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __abs__(self, /):
         """__abs__(self, /)
@@ -292,7 +292,7 @@ class Array:
         
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `abs(x) <#abs-x>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __add__(self, other, /):
         """__add__(self, other, /)
@@ -393,7 +393,7 @@ class Array:
         
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `add(x1, x2) <#add-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __and__(self, other, /):
         """__and__(self, other, /)
@@ -429,7 +429,7 @@ class Array:
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `bitwise_and(x1, x2)
             <#logical-and-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __array_namespace__(self, /, *, api_version=None):
         """__array_namespace__(self, /, *, api_version=None)
@@ -466,7 +466,7 @@ class Array:
                 attribute. It may contain other public names as well, but it
                 is recommended to only include those names that are part of
                 the specification."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __bool__(self, /):
         """__bool__(self, /)
@@ -491,7 +491,7 @@ class Array:
         
             *   a Python ``bool`` object representing the single element of
                 the array."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __dlpack__(self, /, *, stream=None):
         """__dlpack__(self, /, *, stream=None)
@@ -574,7 +574,7 @@ class Array:
         
             *   a DLPack capsule for the array. See data-interchange for
                 details."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __dlpack_device__(self, /):
         """__dlpack_device__(self, /)
@@ -610,7 +610,7 @@ class Array:
                     METAL = 8
                     VPI = 9
                     ROCM = 10"""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __eq__(self, other, /):
         """__eq__(self, other, /)
@@ -643,7 +643,7 @@ class Array:
         
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `equal(x1, x2) <#equal-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __float__(self, /):
         """__float__(self, /)
@@ -669,7 +669,7 @@ class Array:
         
             *   a Python ``float`` object representing the single element of
                 the array instance."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __floordiv__(self, other, /):
         """__floordiv__(self, other, /)
@@ -705,7 +705,7 @@ class Array:
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `floor_divide(x1, x2)
             <#floor-divide-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __ge__(self, other, /):
         """__ge__(self, other, /)
@@ -740,7 +740,7 @@ class Array:
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `greater_equal(x1, x2)
             <#greater-equal-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __getitem__(self, key, /):
         """__getitem__(self, key, /)
@@ -769,7 +769,7 @@ class Array:
         
             *   an array containing the accessed value(s). The returned array
                 must have the same data type as ``self``."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __gt__(self, other, /):
         """__gt__(self, other, /)
@@ -804,7 +804,7 @@ class Array:
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `greater(x1, x2)
             <#greater-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __index__(self, /):
         """__index__(self, /)
@@ -833,7 +833,7 @@ class Array:
         
             *   a Python ``int`` object representing the single element of the
                 array instance."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __int__(self, /):
         """__int__(self, /)
@@ -858,7 +858,7 @@ class Array:
         
             *   a Python ``int`` object representing the single element of the
                 array instance."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __invert__(self, /):
         """__invert__(self, /)
@@ -886,7 +886,7 @@ class Array:
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `bitwise_invert(x)
             <#bitwise-invert-x>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __le__(self, other, /):
         """__le__(self, other, /)
@@ -921,7 +921,7 @@ class Array:
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `less_equal(x1, x2)
             <#less-equal-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __len__(self, /):
         """__len__(self, /)
@@ -932,7 +932,7 @@ class Array:
         clear whether this should be implemented, as, e.g., NumPy’s behavior
         of returning the size of the first dimension is not necessarily
         intuitive, as opposed to, say, the total number of elements.*"""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __lshift__(self, other, /):
         """__lshift__(self, other, /)
@@ -967,7 +967,7 @@ class Array:
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `bitwise_left_shift(x1, x2)
             <#bitwise-left-shift-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __lt__(self, other, /):
         """__lt__(self, other, /)
@@ -1001,7 +1001,7 @@ class Array:
         
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `less(x1, x2) <#less-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __matmul__(self, other, /):
         """__matmul__(self, other, /)
@@ -1117,7 +1117,7 @@ class Array:
         
         *   if ``self`` is an array having shape ``(..., M, K)``, ``other`` is
             an array having shape ``(..., L, N)``, and ``K != L``."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __mod__(self, other, /):
         """__mod__(self, other, /)
@@ -1155,7 +1155,7 @@ class Array:
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `remainder(x1, x2)
             <#remainder-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __mul__(self, other, /):
         """__mul__(self, other, /)
@@ -1241,7 +1241,7 @@ class Array:
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `multiply(x1, x2)
             <#multiply-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __ne__(self, other, /):
         """__ne__(self, other, /)
@@ -1276,7 +1276,7 @@ class Array:
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `not_equal(x1, x2)
             <#not-equal-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __neg__(self, /):
         """__neg__(self, /)
@@ -1307,7 +1307,7 @@ class Array:
         
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `negative(x) <#negative-x>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __or__(self, other, /):
         """__or__(self, other, /)
@@ -1343,7 +1343,7 @@ class Array:
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `bitwise_or(x1, x2)
             <#bitwise-or-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __pos__(self, /):
         """__pos__(self, /)
@@ -1370,7 +1370,7 @@ class Array:
         
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `positive(x) <#positive-x>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __pow__(self, other, /):
         """__pow__(self, other, /)
@@ -1488,7 +1488,7 @@ class Array:
         
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `pow(x1, x2) <#pow-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __rshift__(self, other, /):
         """__rshift__(self, other, /)
@@ -1523,7 +1523,7 @@ class Array:
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `bitwise_right_shift(x1, x2)
             <#bitwise-right-shift-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __setitem__(self, key, value, /):
         """__setitem__(self, key, value, /)
@@ -1556,7 +1556,7 @@ class Array:
             <#type-promotion>`_).When ``value`` is an ``array`` of a different
             data type than ``self``, how values are cast to the data type of
             ``self`` is implementation defined."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __sub__(self, other, /):
         """__sub__(self, other, /)
@@ -1596,7 +1596,7 @@ class Array:
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `subtract(x1, x2)
             <#subtract-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __truediv__(self, other, /):
         """__truediv__(self, other, /)
@@ -1712,7 +1712,7 @@ class Array:
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `divide(x1, x2)
             <#divide-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def __xor__(self, other, /):
         """__xor__(self, other, /)
@@ -1748,7 +1748,7 @@ class Array:
         Note: Element-wise results must equal the results returned by the
             equivalent element-wise function `bitwise_xor(x1, x2)
             <#bitwise-xor-x1-x2>`_."""
-        raise NotImplemented
+        raise NotImplementedError
 
     def to_device(self, device, /):
         """to_device(self, device, /)
@@ -1776,5 +1776,5 @@ class Array:
         
             *   an array with the same data and dtype, located on the
                 specified device."""
-        raise NotImplemented
+        raise NotImplementedError
 

@@ -28,7 +28,7 @@ def abs(x, /):
         *   an array containing the absolute value of each element in
             ``x``. The returned array must have the same data type as
             ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def acos(x, /):
     """Calculates an implementation-dependent approximation of the principal
@@ -61,7 +61,7 @@ def acos(x, /):
         *   an array containing the inverse cosine of each element in
             ``x``. The returned array must have a floating-point data type
             determined by `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def acosh(x, /):
     """Calculates an implementation-dependent approximation to the inverse
@@ -96,7 +96,7 @@ def acosh(x, /):
             element in ``x``. The returned array must have a
             floating-point data type determined by `Type Promotion Rules
             <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def add(x1, x2, /):
     """Calculates the sum for each element ``x1_i`` of the input array ``x1``
@@ -183,7 +183,7 @@ def add(x1, x2, /):
         *   an array containing the element-wise sums. The returned array
             must have a data type determined by `Type Promotion Rules
             <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def asin(x, /):
     """Calculates an implementation-dependent approximation of the principal
@@ -218,7 +218,7 @@ def asin(x, /):
         *   an array containing the inverse sine of each element in ``x``.
             The returned array must have a floating-point data type
             determined by `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def asinh(x, /):
     """Calculates an implementation-dependent approximation to the inverse
@@ -255,7 +255,7 @@ def asinh(x, /):
             element in ``x``. The returned array must have a
             floating-point data type determined by `Type Promotion Rules
             <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def atan(x, /):
     """Calculates an implementation-dependent approximation of the principal
@@ -292,7 +292,7 @@ def atan(x, /):
         *   an array containing the inverse tangent of each element in
             ``x``. The returned array must have a floating-point data type
             determined by `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def atan2(x1, x2, /):
     """Calculates an implementation-dependent approximation of the inverse
@@ -412,7 +412,7 @@ def atan2(x1, x2, /):
         *   an array containing the inverse tangent of the quotient
             ``x1/x2``. The returned array must have a floating-point data
             type determined by `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def atanh(x, /):
     """Calculates an implementation-dependent approximation to the inverse
@@ -453,7 +453,7 @@ def atanh(x, /):
             element in ``x``. The returned array must have a
             floating-point data type determined by `Type Promotion Rules
             <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def bitwise_and(x1, x2, /):
     """Computes the bitwise AND of the underlying binary representation of
@@ -480,7 +480,7 @@ def bitwise_and(x1, x2, /):
         *   an array containing the element-wise results. The returned
             array must have a data type determined by `Type Promotion
             Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def bitwise_left_shift(x1, x2, /):
     """Shifts the bits of each element ``x1_i`` of the input array ``x1`` to
@@ -506,7 +506,7 @@ def bitwise_left_shift(x1, x2, /):
         *   an array containing the element-wise results. The returned
             array must have a data type determined by `Type Promotion
             Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def bitwise_invert(x, /):
     """Inverts (flips) each bit for each element ``x_i`` of the input array
@@ -524,7 +524,7 @@ def bitwise_invert(x, /):
     
         *   an array containing the element-wise results. The returned
             array must have the same data type as ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def bitwise_or(x1, x2, /):
     """Computes the bitwise OR of the underlying binary representation of
@@ -551,7 +551,7 @@ def bitwise_or(x1, x2, /):
         *   an array containing the element-wise results. The returned
             array must have a data type determined by `Type Promotion
             Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def bitwise_right_shift(x1, x2, /):
     """Shifts the bits of each element ``x1_i`` of the input array ``x1`` to
@@ -580,7 +580,7 @@ def bitwise_right_shift(x1, x2, /):
         *   an array containing the element-wise results. The returned
             array must have a data type determined by `Type Promotion
             Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def bitwise_xor(x1, x2, /):
     """Computes the bitwise XOR of the underlying binary representation of
@@ -607,7 +607,7 @@ def bitwise_xor(x1, x2, /):
         *   an array containing the element-wise results. The returned
             array must have a data type determined by `Type Promotion
             Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def ceil(x, /):
     """Rounds each element ``x_i`` of the input array ``x`` to the smallest
@@ -631,7 +631,7 @@ def ceil(x, /):
         *   an array containing the rounded result for each element in
             ``x``. The returned array must have the same data type as
             ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def cos(x, /):
     """Calculates an implementation-dependent approximation to the cosine,
@@ -667,7 +667,7 @@ def cos(x, /):
         *   an array containing the cosine of each element in ``x``. The
             returned array must have a floating-point data type determined
             by `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def cosh(x, /):
     """Calculates an implementation-dependent approximation to the hyperbolic
@@ -703,7 +703,7 @@ def cosh(x, /):
         *   an array containing the hyperbolic cosine of each element in
             ``x``. The returned array must have a floating-point data type
             determined by `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def divide(x1, x2, /):
     """Calculates the division for each element ``x1_i`` of the input array
@@ -805,7 +805,7 @@ def divide(x1, x2, /):
         *   an array containing the element-wise results. The returned
             array must have a floating-point data type determined by `Type
             Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def equal(x1, x2, /):
     """Computes the truth value of ``x1_i == x2_i`` for each element ``x1_i``
@@ -829,7 +829,7 @@ def equal(x1, x2, /):
     
         *   an array containing the element-wise results. The returned
             array must have a data type of ``bool``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def exp(x, /):
     """Calculates an implementation-dependent approximation to the
@@ -866,7 +866,7 @@ def exp(x, /):
             for each element in ``x``. The returned array must have a
             floating-point data type determined by `Type Promotion Rules
             <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def expm1(x, /):
     """Calculates an implementation-dependent approximation to ``exp(x)-1``,
@@ -905,7 +905,7 @@ def expm1(x, /):
         *   an array containing the evaluated result for each element in
             ``x``. The returned array must have a floating-point data type
             determined by `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def floor(x, /):
     """Rounds each element ``x_i`` of the input array ``x`` to the greatest
@@ -929,7 +929,7 @@ def floor(x, /):
         *   an array containing the rounded result for each element in
             ``x``. The returned array must have the same data type as
             ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def floor_divide(x1, x2, /):
     """Rounds the result of dividing each element ``x1_i`` of the input array
@@ -956,7 +956,7 @@ def floor_divide(x1, x2, /):
         *   an array containing the element-wise results. The returned
             array must have a data type determined by `Type Promotion
             Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def greater(x1, x2, /):
     """Computes the truth value of ``x1_i > x2_i`` for each element ``x1_i``
@@ -981,7 +981,7 @@ def greater(x1, x2, /):
     
         *   an array containing the element-wise results. The returned
             array must have a data type of ``bool``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def greater_equal(x1, x2, /):
     """Computes the truth value of ``x1_i >= x2_i`` for each element ``x1_i``
@@ -1006,7 +1006,7 @@ def greater_equal(x1, x2, /):
     
         *   an array containing the element-wise results. The returned
             array must have a data type of ``bool``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def isfinite(x, /):
     """Tests each element ``x_i`` of the input array ``x`` to determine if
@@ -1026,7 +1026,7 @@ def isfinite(x, /):
         *   an array containing test results. An element ``out_i`` is
             ``True`` if ``x_i`` is finite and ``False`` otherwise. The
             returned array must have a data type of ``bool``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def isinf(x, /):
     """Tests each element ``x_i`` of the input array ``x`` to determine if
@@ -1046,7 +1046,7 @@ def isinf(x, /):
             ``True`` if ``x_i`` is either positive or negative infinity
             and ``False`` otherwise. The returned array must have a data
             type of ``bool``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def isnan(x, /):
     """Tests each element ``x_i`` of the input array ``x`` to determine
@@ -1065,7 +1065,7 @@ def isnan(x, /):
         *   an array containing test results. An element ``out_i`` is
             ``True`` if ``x_i`` is ``NaN`` and ``False`` otherwise. The
             returned array should have a data type of ``bool``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def less(x1, x2, /):
     """Computes the truth value of ``x1_i < x2_i`` for each element ``x1_i``
@@ -1090,7 +1090,7 @@ def less(x1, x2, /):
     
         *   an array containing the element-wise results. The returned
             array must have a data type of ``bool``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def less_equal(x1, x2, /):
     """Computes the truth value of ``x1_i <= x2_i`` for each element ``x1_i``
@@ -1115,7 +1115,7 @@ def less_equal(x1, x2, /):
     
         *   an array containing the element-wise results. The returned
             array must have a data type of ``bool``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def log(x, /):
     """Calculates an implementation-dependent approximation to the natural
@@ -1152,7 +1152,7 @@ def log(x, /):
             element in ``x``. The returned array must have a
             floating-point data type determined by `Type Promotion Rules
             <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def log1p(x, /):
     """Calculates an implementation-dependent approximation to ``log(1+x)``,
@@ -1194,7 +1194,7 @@ def log1p(x, /):
         *   an array containing the evaluated result for each element in
             ``x``. The returned array must have a floating-point data type
             determined by `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def log2(x, /):
     """Calculates an implementation-dependent approximation to the base ``2``
@@ -1230,7 +1230,7 @@ def log2(x, /):
             each element in ``x``. The returned array must have a
             floating-point data type determined by `Type Promotion Rules
             <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def log10(x, /):
     """Calculates an implementation-dependent approximation to the base
@@ -1267,7 +1267,7 @@ def log10(x, /):
             each element in ``x``. The returned array must have a
             floating-point data type determined by `Type Promotion Rules
             <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def logaddexp(x1, x2):
     """Calculates the logarithm of the sum of exponentiations ``log(exp(x1) +
@@ -1305,7 +1305,7 @@ def logaddexp(x1, x2):
         *   an array containing the element-wise results. The returned
             array must have a floating-point data type determined by `Type
             Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def logical_and(x1, x2, /):
     """Computes the logical AND for each element ``x1_i`` of the input array
@@ -1335,7 +1335,7 @@ def logical_and(x1, x2, /):
     
         *   an array containing the element-wise results. The returned
             array must have a data type of ``bool``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def logical_not(x, /):
     """Computes the logical NOT for each element ``x_i`` of the input array
@@ -1359,7 +1359,7 @@ def logical_not(x, /):
     
         *   an array containing the element-wise results. The returned
             array must have a data type of ``bool``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def logical_or(x1, x2, /):
     """Computes the logical OR for each element ``x1_i`` of the input array
@@ -1389,7 +1389,7 @@ def logical_or(x1, x2, /):
     
         *   an array containing the element-wise results. The returned
             array must have a data type of ``bool``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def logical_xor(x1, x2, /):
     """Computes the logical XOR for each element ``x1_i`` of the input array
@@ -1419,7 +1419,7 @@ def logical_xor(x1, x2, /):
     
         *   an array containing the element-wise results. The returned
             array must have a data type of ``bool``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def multiply(x1, x2, /):
     """Calculates the product for each element ``x1_i`` of the input array
@@ -1491,7 +1491,7 @@ def multiply(x1, x2, /):
         *   an array containing the element-wise products. The returned
             array must have a data type determined by `Type Promotion
             Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def negative(x, /):
     """Computes the numerical negative of each element ``x_i`` (i.e., ``y_i =
@@ -1512,7 +1512,7 @@ def negative(x, /):
         *   an array containing the evaluated result for each element in
             ``x``. The returned array must have a data type determined by
             `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def not_equal(x1, x2, /):
     """Computes the truth value of ``x1_i != x2_i`` for each element ``x1_i``
@@ -1536,7 +1536,7 @@ def not_equal(x1, x2, /):
     
         *   an array containing the element-wise results. The returned
             array must have a data type of ``bool``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def positive(x, /):
     """Computes the numerical positive of each element ``x_i`` (i.e., ``y_i =
@@ -1555,7 +1555,7 @@ def positive(x, /):
         *   an array containing the evaluated result for each element in
             ``x``. The returned array must have the same data type as
             ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def pow(x1, x2, /):
     """Calculates an implementation-dependent approximation of exponentiation
@@ -1661,7 +1661,7 @@ def pow(x1, x2, /):
         *   an array containing the element-wise results. The returned
             array must have a data type determined by `Type Promotion
             Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def remainder(x1, x2, /):
     """Returns the remainder of division for each element ``x1_i`` of the
@@ -1688,7 +1688,7 @@ def remainder(x1, x2, /):
             element-wise result must have the same sign as the respective
             element ``x2_i``. The returned array must have a data type
             determined by `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def round(x, /):
     """Rounds each element ``x_i`` of the input array ``x`` to the nearest
@@ -1714,7 +1714,7 @@ def round(x, /):
         *   an array containing the rounded result for each element in
             ``x``. The returned array must have the same data type as
             ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def sign(x, /):
     """Returns an indication of the sign of a number for each element ``x_i``
@@ -1741,7 +1741,7 @@ def sign(x, /):
         *   an array containing the evaluated result for each element in
             ``x``. The returned array must have the same data type as
             ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def sin(x, /):
     """Calculates an implementation-dependent approximation to the sine,
@@ -1776,7 +1776,7 @@ def sin(x, /):
         *   an array containing the sine of each element in ``x``. The
             returned array must have a floating-point data type determined
             by `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def sinh(x, /):
     """Calculates an implementation-dependent approximation to the hyperbolic
@@ -1812,7 +1812,7 @@ def sinh(x, /):
         *   an array containing the hyperbolic sine of each element in
             ``x``. The returned array must have a floating-point data type
             determined by `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def square(x, /):
     """Squares (``x_i * x_i``) each element ``x_i`` of the input array ``x``.
@@ -1830,7 +1830,7 @@ def square(x, /):
         *   an array containing the evaluated result for each element in
             ``x``. The returned array must have a data type determined by
             `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def sqrt(x, /):
     """Calculates the square root, having domain ``[0, +infinity]`` and
@@ -1865,7 +1865,7 @@ def sqrt(x, /):
         *   an array containing the square root of each element in ``x``.
             The returned array must have a floating-point data type
             determined by `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def subtract(x1, x2, /):
     """Calculates the difference for each element ``x1_i`` of the input array
@@ -1893,7 +1893,7 @@ def subtract(x1, x2, /):
         *   an array containing the element-wise differences. The returned
             array must have a data type determined by `Type Promotion
             Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def tan(x, /):
     """Calculates an implementation-dependent approximation to the tangent,
@@ -1928,7 +1928,7 @@ def tan(x, /):
         *   an array containing the tangent of each element in ``x``. The
             returned array must have a floating-point data type determined
             by `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def tanh(x, /):
     """Calculates an implementation-dependent approximation to the hyperbolic
@@ -1963,7 +1963,7 @@ def tanh(x, /):
         *   an array containing the hyperbolic tangent of each element in
             ``x``. The returned array must have a floating-point data type
             determined by `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def trunc(x, /):
     """Rounds each element ``x_i`` of the input array ``x`` to the
@@ -1986,5 +1986,5 @@ def trunc(x, /):
         *   an array containing the rounded result for each element in
             ``x``. The returned array must have the same data type as
             ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 

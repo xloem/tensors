@@ -46,7 +46,7 @@ def arange(start, /, stop=None, step=1, *, dtype=None, device=None):
             length of the output array must be ``ceil((stop-start)/step)``
             if ``stop - start`` and ``step`` have the same sign, and
             length 0 otherwise."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def asarray(obj, /, *, dtype=None, device=None, copy=None):
     """Convert the input to an array.
@@ -97,7 +97,7 @@ def asarray(obj, /, *, dtype=None, device=None, copy=None):
     *   **out**: *<array>*
     
         *   An array containing the data from ``obj``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def empty(shape, *, dtype=None, device=None):
     """Returns an uninitialized array having a specified ``shape``.
@@ -123,7 +123,7 @@ def empty(shape, *, dtype=None, device=None):
     *   **out**: *<array>*
     
         *   an array containing uninitialized data."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def empty_like(x, /, *, dtype=None, device=None):
     """Returns an uninitialized array with the same ``shape`` as an input
@@ -153,7 +153,7 @@ def empty_like(x, /, *, dtype=None, device=None):
     
         *   an array having the same shape as ``x`` and containing
             uninitialized data."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def eye(n_rows, n_cols=None, /, *, k=0, dtype=None, device=None):
     """Returns a two-dimensional array with ones on the ``k``th diagonal and
@@ -193,7 +193,7 @@ def eye(n_rows, n_cols=None, /, *, k=0, dtype=None, device=None):
     
         *   an array where all elements are equal to zero, except for the
             ``k``th diagonal, whose values are equal to one."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def from_dlpack(x, /):
     """Returns a new array containing the data from another (array) object
@@ -213,7 +213,7 @@ def from_dlpack(x, /):
     
             Note: The returned array may be either a copy or a view. See
                 data-interchange for details."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def full(shape, fill_value, *, dtype=None, device=None):
     """Returns a new array having a specified ``shape`` and filled with
@@ -253,7 +253,7 @@ def full(shape, fill_value, *, dtype=None, device=None):
     *   **out**: *<array>*
     
         *   an array where every element is equal to ``fill_value``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def full_like(x, /, fill_value, *, dtype=None, device=None):
     """Returns a new array filled with ``fill_value`` and having the same
@@ -297,7 +297,7 @@ def full_like(x, /, fill_value, *, dtype=None, device=None):
     
         *   an array having the same shape as ``x`` and where every
             element is equal to ``fill_value``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def linspace(start, stop, /, num, *, dtype=None, device=None, endpoint=True):
     """Returns evenly spaced numbers over a specified interval.
@@ -347,7 +347,7 @@ def linspace(start, stop, /, num, *, dtype=None, device=None, endpoint=True):
     *   **out**: *<array>*
     
         *   a one-dimensional array containing evenly spaced values."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def meshgrid(*arrays, indexing='xy'):
     """Returns coordinate matrices from coordinate vectors.
@@ -395,7 +395,7 @@ def meshgrid(*arrays, indexing='xy'):
     
             The returned arrays must have a numeric data type determined
             by `Type Promotion Rules <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def ones(shape, *, dtype=None, device=None):
     """Returns a new array having a specified ``shape`` and filled with ones.
@@ -421,7 +421,7 @@ def ones(shape, *, dtype=None, device=None):
     *   **out**: *<array>*
     
         *   an array containing ones."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def ones_like(x, /, *, dtype=None, device=None):
     """Returns a new array filled with ones and having the same ``shape`` as
@@ -450,7 +450,7 @@ def ones_like(x, /, *, dtype=None, device=None):
     *   **out**: *<array>*
     
         *   an array having the same shape as ``x`` and filled with ones."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def tril(x, /, *, k=0):
     """Returns the lower triangular part of a matrix (or a stack of matrices)
@@ -484,7 +484,7 @@ def tril(x, /, *, k=0):
             elements above the specified diagonal ``k`` must be zeroed.
             The returned array should be allocated on the same device as
             ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def triu(x, /, *, k=0):
     """Returns the upper triangular part of a matrix (or a stack of matrices)
@@ -518,7 +518,7 @@ def triu(x, /, *, k=0):
             elements below the specified diagonal ``k`` must be zeroed.
             The returned array should be allocated on the same device as
             ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def zeros(shape, *, dtype=None, device=None):
     """Returns a new array having a specified ``shape`` and filled with
@@ -545,7 +545,7 @@ def zeros(shape, *, dtype=None, device=None):
     *   **out**: *<array>*
     
         *   an array containing zeros."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def zeros_like(x, /, *, dtype=None, device=None):
     """Returns a new array filled with zeros and having the same ``shape`` as
@@ -574,5 +574,5 @@ def zeros_like(x, /, *, dtype=None, device=None):
     *   **out**: *<array>*
     
         *   an array having the same shape as ``x`` and filled with zeros."""
-    raise NotImplemented
+    raise NotImplementedError
 

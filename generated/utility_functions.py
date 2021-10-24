@@ -40,7 +40,7 @@ def all(x, /, *, axis=None, keepdims=False):
             containing the test result; otherwise, the returned array must
             be a non-zero-dimensional array containing the test results.
             The returned array must have a data type of ``bool``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def any(x, /, *, axis=None, keepdims=False):
     """Tests whether any input array element evaluates to ``True`` along a
@@ -84,5 +84,5 @@ def any(x, /, *, axis=None, keepdims=False):
             the test result; otherwise, the returned array must be a
             non-zero-dimensional array containing the test results. The
             returned array must have a data type of ``bool``."""
-    raise NotImplemented
+    raise NotImplementedError
 

@@ -35,7 +35,7 @@ def argsort(x, /, *, axis=-1, descending=False, stable=True):
         *   an array of indices. The returned array must have the same
             shape as ``x``. The returned array must have the default array
             index data type."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def sort(x, /, *, axis=-1, descending=False, stable=True):
     """Returns a sorted copy of an input array ``x``.
@@ -72,5 +72,5 @@ def sort(x, /, *, axis=-1, descending=False, stable=True):
     
         *   a sorted array. The returned array must have the same data
             type and shape as ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 

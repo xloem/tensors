@@ -54,7 +54,7 @@ class Builder(sphinx.builders.Builder):
                 lines.extend(doc.split('\n'))
         lines[0] = '"""' + lines[0]
         lines[-1] += '"""'
-        lines.append('raise NotImplemented\n')
+        lines.append('raise NotImplementedError\n')
         for line in lines:
             file.write(indent2 + line + '\n')
     def node_to_rst(self, document, node):

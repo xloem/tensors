@@ -39,7 +39,7 @@ def max(x, /, *, axis=None, keepdims=False):
             otherwise, a non-zero-dimensional array containing the maximum
             values. The returned array must have the same data type as
             ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def mean(x, /, *, axis=None, keepdims=False):
     """Calculates the arithmetic mean of the input array ``x``.
@@ -91,7 +91,7 @@ def mean(x, /, *, axis=None, keepdims=False):
                 the input array ``x`` has an integer data type, the
                 returned array must have the default floating-point data
                 type."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def min(x, /, *, axis=None, keepdims=False):
     """Calculates the minimum value of the input array ``x``.
@@ -134,7 +134,7 @@ def min(x, /, *, axis=None, keepdims=False):
             otherwise, a non-zero-dimensional array containing the minimum
             values. The returned array must have the same data type as
             ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def prod(x, /, *, axis=None, dtype=None, keepdims=False):
     """Calculates the product of input array ``x`` elements.
@@ -201,7 +201,7 @@ def prod(x, /, *, axis=None, dtype=None, keepdims=False):
             non-zero-dimensional array containing the products. The
             returned array must have a data type as described by the
             ``dtype`` parameter above."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def std(x, /, *, axis=None, correction=0.0, keepdims=False):
     """Calculates the standard deviation of the input array ``x``.
@@ -271,7 +271,7 @@ def std(x, /, *, axis=None, correction=0.0, keepdims=False):
                 the input array ``x`` has an integer data type, the
                 returned array must have the default floating-point data
                 type."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def sum(x, /, *, axis=None, dtype=None, keepdims=False):
     """Calculates the sum of the input array ``x``.
@@ -337,7 +337,7 @@ def sum(x, /, *, axis=None, dtype=None, keepdims=False):
             zero-dimensional array containing the sum; otherwise, an array
             containing the sums. The returned array must have a data type
             as described by the ``dtype`` parameter above."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def var(x, /, *, axis=None, correction=0.0, keepdims=False):
     """Calculates the variance of the input array ``x``.
@@ -405,5 +405,5 @@ def var(x, /, *, axis=None, correction=0.0, keepdims=False):
                 the input array ``x`` has an integer data type, the
                 returned array must have the default floating-point data
                 type."""
-    raise NotImplemented
+    raise NotImplementedError
 

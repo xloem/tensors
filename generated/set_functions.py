@@ -45,7 +45,7 @@ def unique_all(x, /):
     
             Note: The order of unique elements is not specified and may vary
                 between implementations."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def unique_inverse(x, /):
     """Returns the unique elements of an input array ``x`` and the indices
@@ -83,7 +83,7 @@ def unique_inverse(x, /):
     
             Note: The order of unique elements is not specified and may vary
                 between implementations."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def unique_values(x, /):
     """Data-dependent output shape: The shape of the output array for this
@@ -111,5 +111,5 @@ def unique_values(x, /):
     
             Note: The order of unique elements is not specified and may vary
                 between implementations."""
-    raise NotImplemented
+    raise NotImplementedError
 

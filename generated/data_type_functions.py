@@ -14,7 +14,7 @@ def broadcast_arrays(*arrays):
         *   a list of broadcasted arrays. Each array must have the same
             shape. Each array must have the same dtype as its
             corresponding input array."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def broadcast_to(x, /, shape):
     """Broadcasts an array to a specified shape.
@@ -41,7 +41,7 @@ def broadcast_to(x, /, shape):
     
     *   if the array is incompatible with the specified shape (see
         `Broadcasting <#broadcasting>`_)."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def can_cast(from_, to, /):
     """Determines if one data type can be cast to another data type according
@@ -63,7 +63,7 @@ def can_cast(from_, to, /):
     
         *   ``True`` if the cast can occur according to `Type Promotion
             Rules <#type-promotion>`_ rules; otherwise, ``False``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def finfo(type, /):
     """Machine limits for floating-point data types.
@@ -104,7 +104,7 @@ def finfo(type, /):
     
                 *   smallest positive floating-point number with full
                     precision."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def iinfo(type, /):
     """Machine limits for integer data types.
@@ -132,7 +132,7 @@ def iinfo(type, /):
             *   **min**: *int*
     
                 *   smallest representable number."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def result_type(*arrays_and_dtypes):
     """Returns the dtype that results from applying the type promotion rules
@@ -152,5 +152,5 @@ def result_type(*arrays_and_dtypes):
     
         *   the dtype resulting from an operation involving the input
             arrays and dtypes."""
-    raise NotImplemented
+    raise NotImplementedError
 

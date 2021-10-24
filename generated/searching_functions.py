@@ -33,7 +33,7 @@ def argmax(x, /, *, axis=None, keepdims=False):
             otherwise, a non-zero-dimensional array containing the indices
             of the maximum values. The returned array must have be the
             default array index data type."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def argmin(x, /, *, axis=None, keepdims=False):
     """Returns the indices of the minimum values along a specified axis. When
@@ -70,7 +70,7 @@ def argmin(x, /, *, axis=None, keepdims=False):
             otherwise, a non-zero-dimensional array containing the indices
             of the minimum values. The returned array must have the
             default array index data type."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def nonzero(x, /):
     """Data-dependent output shape: The shape of the output array for this
@@ -98,7 +98,7 @@ def nonzero(x, /):
             elements in that dimension. The indices must be returned in
             row-major, C-style order. The returned array must have the
             default array index data type."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def where(condition, x1, x2, /):
     """Returns elements chosen from ``x1`` or ``x2`` depending on
@@ -131,5 +131,5 @@ def where(condition, x1, x2, /):
             array must have a data type determined by `Type Promotion
             Rules <#type-promotion>`_ rules with the arrays ``x1`` and
             ``x2``."""
-    raise NotImplemented
+    raise NotImplementedError
 

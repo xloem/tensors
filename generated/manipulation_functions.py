@@ -28,7 +28,7 @@ def concat(arrays, /, *, axis=0):
     
             Note: This specification leaves type promotion between data type
                 families (i.e., ``intxx`` and ``floatxx``) unspecified."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def expand_dims(x, /, *, axis):
     """Expands the shape of an array by inserting a new axis (dimension) of
@@ -55,7 +55,7 @@ def expand_dims(x, /, *, axis):
     
         *   an expanded output array having the same data type and shape
             as ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def flip(x, /, *, axis=None):
     """Reverses the order of elements in an array along the given axis. The
@@ -81,7 +81,7 @@ def flip(x, /, *, axis=None):
     
         *   an output array having the same data type and shape as ``x``
             and whose elements, relative to ``x``, are reordered."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def permute_dims(x, /, axes):
     """Permutes the axes (dimensions) of an array ``x``.
@@ -103,7 +103,7 @@ def permute_dims(x, /, axes):
     
         *   an array containing the axes permutation. The returned array
             must have the same data type as ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def reshape(x, /, shape):
     """Reshapes an array without changing its data.
@@ -128,7 +128,7 @@ def reshape(x, /, shape):
     
         *   an output array having the same data type, elements, and
             underlying element order as ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def roll(x, /, shift, *, axis=None):
     """Rolls array elements along a specified axis. Array elements that roll
@@ -167,7 +167,7 @@ def roll(x, /, shift, *, axis=None):
     
         *   an output array having the same data type as ``x`` and whose
             elements, relative to ``x``, are shifted."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def squeeze(x, /, axis):
     """Removes singleton dimensions (axes) from ``x``.
@@ -189,7 +189,7 @@ def squeeze(x, /, axis):
     
         *   an output array having the same data type and elements as
             ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def stack(arrays, /, *, axis=0):
     """Joins a sequence of arrays along a new axis.
@@ -228,5 +228,5 @@ def stack(arrays, /, *, axis=0):
     
             Note: This specification leaves type promotion between data type
                 families (i.e., ``intxx`` and ``floatxx``) unspecified."""
-    raise NotImplemented
+    raise NotImplementedError
 

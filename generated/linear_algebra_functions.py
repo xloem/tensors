@@ -98,7 +98,7 @@ def matmul(x1, x2, /):
     
     *   if ``x1`` is an array having shape ``(..., M, K)``, ``x2`` is an
         array having shape ``(..., L, N)``, and ``K != L``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def matrix_transpose(x, /):
     """Transposes a matrix (or a stack of matrices) ``x``.
@@ -117,7 +117,7 @@ def matrix_transpose(x, /):
         *   an array containing the transpose for each matrix and having
             shape ``(..., N, M)``. The returned array must have the same
             data type as ``x``."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def tensordot(x1, x2, /, *, axes=2):
     """Returns a tensor contraction of ``x1`` and ``x2`` over specific axes.
@@ -174,7 +174,7 @@ def tensordot(x1, x2, /, *, axes=2):
             of the second array ``x2``. The returned array must have a
             data type determined by `Type Promotion Rules
             <#type-promotion>`_."""
-    raise NotImplemented
+    raise NotImplementedError
 
 def vecdot(x1, x2, /, *, axis=-1):
     """Computes the (vector) dot product of two arrays.
@@ -221,5 +221,5 @@ def vecdot(x1, x2, /, *, axis=-1):
     
     *   if the size of the axis over which to compute the dot product is
         not the same for both ``x1`` and ``x2``."""
-    raise NotImplemented
+    raise NotImplementedError
 
