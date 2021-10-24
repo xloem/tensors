@@ -20,12 +20,14 @@ class Builder(sphinx.builders.Builder):
     name = __name__
     out_suffix = '.py'
     indentation = '    '
+    def doc2targetpath(self, docname):
+        return path.join(self.outdir, path.basename(docname) + self.out_suffix)
     def get_outdated_docs(self):
         for docname in self.env.found_docs:
             if docname not in self.env.all_docs:
                 yield docname
                 continue
-            targetname = path.join(self.outdir, path.basename(docname) + self.out_suffix)
+            targetname = self.doc2targetpath(docname)
             try:
                 targetmtime = path.getmtime(targetname)
             except Exception:
@@ -65,9 +67,7 @@ class Builder(sphinx.builders.Builder):
         trans.depart_document(document)
         return trans.body
     def write_doc(self, docname: str, doctree: 'docutils.nodes.document'):
-        fn = path.basename(docname) + self.out_suffix
-        fn = path.join(self.outdir, fn)
-        with open(fn, 'wt') as output:
+        with open(self.doc2targetpath(docname), 'wt') as output:
             for node in doctree.traverse():
                 if self.node_has_name(node, lambda name: name.startswith('constant-')):
                     const_name = node[0].rawsource
@@ -109,6 +109,14 @@ class Builder(sphinx.builders.Builder):
                             elif text.startswith('__r') and text.endswith('__'):
                                 write.add_member('func', text + '(self, other)', list_item[0])
                     write.write()
+    def finish(self):
+        modules = [path.basename(docname) for docname in self.env.all_docs]
+        with open(self.doc2targetpath('__init__'), 'wt') as output:
+            for docname in self.env.all_docs:
+                modname = path.basename(docname)
+                output.write('from .' + modname + ' import *\n')
+            output.write('__all__ = dir()')
+    
     class WritingObject:
         def __init__(self, builder, file, doc, objectname):
             self.builder = builder
