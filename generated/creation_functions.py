@@ -349,7 +349,7 @@ def linspace(start, stop, /, num, *, dtype=None, device=None, endpoint=True):
         *   a one-dimensional array containing evenly spaced values."""
     raise NotImplemented
 
-def meshgrid(*arrays, indexing=’xy’):
+def meshgrid(*arrays, indexing='xy'):
     """Returns coordinate matrices from coordinate vectors.
     Parameters
     **********

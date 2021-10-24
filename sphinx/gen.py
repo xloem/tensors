@@ -3,7 +3,7 @@ from collections import defaultdict
 from sphinxcontrib.writers.rst import RstTranslator
 import docutils.nodes
 import sphinx.builders
-import pdb
+import unidecode
 
 class RstTranslatorTweak(RstTranslator):
     # bugfix https://github.com/sphinx-contrib/restbuilder/pull/28
@@ -45,7 +45,7 @@ class Builder(sphinx.builders.Builder):
     def node_has_name(node, predicate):
         return hasattr(node, 'attributes') and any((predicate(name) for name in node.attributes['names']))
     def write_stub(self, file, indent, sig, document, *docnodes):
-        file.write(indent + 'def ' + sig + ':\n')
+        file.write(indent + 'def ' + unidecode.unidecode(sig) + ':\n')
         indent2 = indent + self.indentation
         lines = []
         for docnode in docnodes:
