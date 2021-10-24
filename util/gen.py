@@ -112,7 +112,9 @@ class Builder(sphinx.builders.Builder):
     def finish(self):
         modules = [path.basename(docname) for docname in self.env.all_docs]
         with open(self.doc2targetpath('__init__'), 'wt') as output:
-            for docname in self.env.all_docs:
+            modules = [*self.env.all_docs.keys()]
+            modules.sort()
+            for docname in modules:
                 modname = path.basename(docname)
                 output.write('from .' + modname + ' import *\n')
             output.write('__all__ = dir()')
