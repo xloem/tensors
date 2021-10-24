@@ -16,10 +16,10 @@ __dir__ = path.abspath(path.dirname(__file__))
 sys.path.insert(0, __dir__)
 
 # config source dir and import its configuration
-SOURCE_DIR = path.join(__dir__, '..', 'array-api', 'spec')
-
-sys.path.insert(1, path.abspath(path.join(SOURCE_DIR, '..')))
+SOURCE_DIR = path.abspath(path.join(*'../extern/array-api/spec'.split('/')))
+sys.path.insert(0, path.abspath(path.join(SOURCE_DIR, '..')))
 from spec.conf import *
+sys.path.pop(0)
 
 # fix relative paths
 for conf_name, conf_value in [*locals().items()]:

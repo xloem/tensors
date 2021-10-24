@@ -1,3 +1,3 @@
 [submodule "array-api"]
-	path = array-api
+	path = extern/array-api
 	url = https://github.com/data-apis/array-api.git
