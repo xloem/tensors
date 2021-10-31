@@ -7,6 +7,7 @@ from torch.cuda import (
 from torch import (
     tensor,
     Tensor,
+    device as Device,
 
     arange,
 
