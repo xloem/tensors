@@ -1,4 +1,4 @@
-import inspect
+import inspect, types
 
 def member_map_of(obj, public_only=True, **maps):
     for member_name in dir(obj):
@@ -9,31 +9,33 @@ def member_map_of(obj, public_only=True, **maps):
         yield member_name, impl_member_name, member
 
 def wrap_func(func, impl_str, filename, locals={}, globals={}, return_wrap_str=None, **maps):
+    func_name = func.__name__
     sig = inspect.signature(func)
     strsig = str(sig)
     impl_params = []
     kw_params = []
     for paramname in sig.parameters:
         if paramname in maps:
-            kwparams.append(f'{maps[paramname]} = {paramname}')
+            kw_params.append(f'{maps[paramname]} = {paramname}')
         else:
             impl_params.append(paramname)
     impl_params.extend(kw_params)
     impl_params = ', '.join(impl_params)
 
-    if return_wrap_str is not None and "Returns" in member.__doc__:
+    if return_wrap_str is not None and "Returns" in func.__doc__:
         return_wrap_prefix = return_wrap_str + '('
         return_wrap_postfix = ')'
     else:
         return_wrap_prefix = ''
         return_wrap_postfix = ''
 
-    exec(compile(f"""
-        def {member_name}{strsig}:
-            \"\"\"{member.__doc__}\"\"\"
+    exec(compile(inspect.cleandoc(f"""
+        def {func_name}{strsig}:
+            \"\"\"{func.__doc__.replace(chr(10),'''
+            ''')}\"\"\"
             return {return_wrap_prefix}{impl_str}({impl_params}){return_wrap_postfix}
-    """, filename, "exec"), globals, locals)
-    return locals[member_name]
+    """), filename, "exec"), globals, locals)
+    return locals[func_name]
 
 def guesswrap(filename, mod, cls, **maps):
     import arrays_api
@@ -45,20 +47,36 @@ def guesswrap(filename, mod, cls, **maps):
     for member_name, impl_member_name, member in member_map_of(arrays_api, **maps):
         if member is arrays_api.Array:
             continue
-        if type(member) is float:
+        if type(member) in (float, types.ModuleType):
             result[member_name] = member
             continue
 
         submod = mod
-        while '.' in impl_member_name:
-            modname, impl_member_name = impl_member_name.split('.', 1)
+        sub_impl_member_name = impl_member_name
+        while '.' in sub_impl_member_name:
+            modname, sub_impl_member_name = sub_impl_member_name.split('.', 1)
             submod = getattr(submod, modname)
         if not hasattr(submod, impl_member_name):
-            raise NotImplementedError(f"{mod} map not specified properly for member {member_name}.  Other members may work if this check is removed.")
-
-        # functions that return something can be wrapped in Array
-
-        wrap_func(member, 'mod.' + impl_member_name, filename, result, globals=dict(impl=mod), return_wrap_str=Array_name, **maps)
+            found = False
+            for obj_member_name, obj_impl_member_name, obj_member in member_map_of(arrays_api.Array, public_only = False, **maps):
+                if obj_member.__doc__ is not None and member_name in obj_member.__doc__:
+                    found = True
+                    break
+            if found:
+                wrap_func(member, Array_name + '.' + obj_member_name, filename, result)
+            else:
+                if callable(member):
+                    print('MISSING:', member_name + str(inspect.signature(member)) + ':')
+                    print(member.__doc__)
+                else:
+                    print('MISSING:', member_name)
+                locals()[member_name] = member
+                #raise NotImplementedError(f"{mod.__name__} map not specified properly for member {member_name}.  Other members may work if this check is removed.")
+        elif member is NotImplemented:
+            exec(compile(f'{member_name} = impl.' + impl_member_name, filename, 'exec'), dict(impl=mod), result)
+        else:
+            wrap_func(member, 'impl.' + impl_member_name, filename, result, globals=dict(impl=mod), return_wrap_str=Array_name, **maps)
+            
 
     class Array:
         def __init__(self, src):
@@ -67,20 +85,32 @@ def guesswrap(filename, mod, cls, **maps):
             else:
                 raise NotImplementedError
 
+        wrap_func(arrays_api.Array.__array_namespace__, 'self #', filename, locals())
+
         for member_name, member in result.items():
-            if member is getattr(arrays_api.creation_functions, member_name):
+            if member is getattr(arrays_api.creation_functions, member_name, None):
                 member = staticmethod(member)
             locals()[member_name] = member
 
-        for member_name, impl_member_nam, member in member_map_of(arrays_api.Array, public_only = False, **maps):
-            if not hasattr(cls, impl_member_name):
-                raise NotImplementedError(f"{cls} map not specified for array member {member_name}.  Other members may work if this check is removed.")
-            if type(member) is property:
-                exec(compile(f"""
+        for member_name, impl_member_name, member in member_map_of(arrays_api.Array, public_only = False, **maps):
+            if hasattr(cls, impl_member_name):
+                prefix = 'self._data.'
+            else:
+                # todo: way to reference module members
+                if member_name in locals():
+                    continue
+                else:
+                    print('MISSING:', member_name + str(inspect.signature(member)) + ':')
+                    print(member.__doc__)
+                    raise NotImplementedError(f"{cls} map not specified for array member {member_name}.  Other members may work if this check is removed.")
+            if hasattr(object, member_name):
+                continue
+            elif type(member) is property:
+                exec(compile(inspect.cleandoc(f"""
                     @property
                     def {member_name}(self):
                        return self._data.{impl_member_name}
-                """, filename, "exec"), locals())
+                """), filename, "exec"), locals())
             else:
                 wrap_func(member, 'self._data.' + impl_member_name, filename, locals(), return_wrap_str=Array_name, **maps)
         del member_name
