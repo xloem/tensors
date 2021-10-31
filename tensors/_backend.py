@@ -1,3 +1,5 @@
+import inspect
+
 backend_names = set(('jax', 'tensorflow', 'torch'))
 
 def load_backend_by_name(name : str):
@@ -15,6 +17,7 @@ def load_backend_by_name(name : str):
 
 backends_by_name = {}
 backends_by_tensor_class = {}
+backends_by_device_class = {}
 
 def load_all_backends():
     return [load_backend_by_name(name) for name in backend_names]
@@ -24,6 +27,7 @@ def register(backend):
     Registers a backend after it is loaded.
     '''
     backends_by_tensor_class[backend.Tensor] = backend
+    backends_by_device_class[backend.Device] = backend
     backends_by_name[backend.name] = backend
 
     import tensors
@@ -62,6 +66,104 @@ def load_new_backends():
     new_backends = [load_backend_by_name(name) for name in new_backends]
     return new_backends
 
+'''
+funcname(x1, x2, /, *, key1=-1, key2=None)
+
+    Parameters
+
+    x1 : array
+        description
+    x2 : array
+        description
+    key1 : int
+        description
+    key2 : Optional[str]
+        description
+
+    Returns
+
+    out : array
+        description
+'''
+
+class array_api:
+    def __init__(self, impl):
+        self._impl = impl
+    def __getitem__(self, idx):
+        return self.__class__(self._impl[idx])
+    def __setitem__(self, idx, val):
+        self._impl[idx] = self._to_impl(val)
+    @property
+    def dtype(self):
+        raise NotImplemented
+    #@property
+    #def device(self):
+    [exec(compile(inspect.cleandoc(f'''
+            def {opname}(x1, x2):
+                return x1.__class__(x1._impl {op} x1.to_impl(x2))
+            __{opname}__ = {opname}
+            '''), __file__, 'exec'),
+        globals(), locals())
+        for opname, op in {
+            'lt':'<', 'le':'<=', 'gt':'>', 'ge':'>=',
+            'eq':'==', 'ne':'!='
+        }.items()
+    ]
+    # wrap remaining binary operators
+    [exec(compile(inspect.cleandoc(f'''
+            def {opname if opname not in ('and', 'or') else opname + '_'}(x1, x2):
+                return x1.__class__(x1._impl {op} x1.to_impl(x2))
+            __{opname}__ = {opname if opname not in ('and', 'or') else opname + '_'}
+            def __r{opname}__(x2, x1):
+                return x2.__class__(x1 {op} x2._impl)
+            def __i{opname}__(x1, x2):
+                x1._impl {op} x1.to_impl(x2)
+            '''), __file__, 'exec'),
+        globals(), locals())
+        for opname, op in {
+            'add':'+', 'sub':'-',
+            'mul':'*', 'truediv':'/', 'floordiv':'//',
+            'pow':'**', 'matmul':'@', 'mod':'%',
+            'and':'&', 'or':'|', 'xor':'^',
+            'lshift':'<<', 'rshift':'>>'
+        }.items()
+    ]
+    # wrap unary operators
+    [exec(compile(inspect.cleandoc(f'''
+            def {opname}(x):
+                return x.__class__({op}x._impl)
+            __{opname}__ = {opname}
+            '''), __file__, 'exec'),
+        globals(), locals())
+        for opname, op in {
+            'pos':'+', 'neg':'-', 'invert':'~'
+        }.items()
+    ]
+
+    @staticmethod
+    def _to_impl(wrapped_val):
+        if isinstance(wrapped_val, array_api):
+            return wrapped_val._impl
+        else:
+            return wrapped_val
+    def __getattr__(self, attr_name):
+        cls = self.__class__
+        subctx = dict(cls = cls)
+        if callable(result):
+            exec(compile(inspect.cleandoc(f'''
+            def ${attr_name}(self, *params, **kwparams):
+                return cls(self._impl.${attr_name}(*params, **kwparams))
+            '''), self.__class__.__module__, 'single'), None, subctx)
+            wrapper = subctx[attr_name]
+        else:
+            exec(compile(inspect.cleandoc(f'''
+            def ${attr_name}(self):
+                return cls(self._impl.${attr_name})
+            '''), self.__class__.__module__, 'single'), None, subctx)
+            wrapper = property(subctx[attr_name])
+        setattr(cls, attr_name, wrapper)
+        return getattr(self, attr_name)
+
 def clone_basic(member, globals):
     import types
     if type(member) is types.FunctionType:
@@ -93,6 +195,7 @@ def module_inherit(globals, supermodule):
 def common_members(
         Tensor : type,
         tensor : callable,
+        Device : type,
         dlpack,
         hwaccel_present : callable,
         __name__ : str = '',
@@ -108,14 +211,14 @@ def common_members(
     name = __name__.split('.')[-1]
 
     @backend_doc(name)
-    def is_backend(tensor) -> bool:
+    def is_backend(object) -> bool:
         '''
-        Identify whether a tensor is from this backend
+        Identify whether an object is from this backend
         '''
-        return isinstance(tensor, Tensor)
+        return isinstance(tensor, Tensor) or isinstance(tensor, Device)
 
     @backend_doc(name)
-    def to_backend(foreign_tensor) -> Tensor:
+    def to_backend(foreign_object) -> Tensor:
         '''
         Convert a tensor to this backend
         '''
@@ -238,7 +341,7 @@ def get_global_stubs():
             func = getattr(backend, function_name)
             return func(*params, **kwparams)
         return wrapper
-    for name in common_members(None, None, None, None):
+    for name in common_members(None, None, None, None, None):
         if 'backend' in name:
             for backend_name in backend_names:
                 backend_func_name = name.replace('backend', backend_name)
