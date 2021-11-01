@@ -78,6 +78,7 @@ def guesswrap(filename, mod, cls, **maps):
             wrap_func(member, 'impl.' + impl_member_name, filename, result, globals=dict(impl=mod), return_wrap_str=Array_name, **maps)
             
 
+    outer_scope = locals()
     class Array:
         def __init__(self, src):
             if isinstance(src, cls):
@@ -93,18 +94,24 @@ def guesswrap(filename, mod, cls, **maps):
             locals()[member_name] = member
 
         for member_name, impl_member_name, member in member_map_of(arrays_api.Array, public_only = False, **maps):
-            if hasattr(cls, impl_member_name):
-                prefix = 'self._data.'
-            else:
-                # todo: way to reference module members
+            if hasattr(object, member_name):
+                continue
+            for test, prefix in (('cls.','self._data.'), ('mod.','impl.'), (None,None)):
+                try:
+                    if eval(compile(test + impl_member_name, filename, 'eval'), outer_scope) is not None:
+                        break
+                except:
+                    pass
+            if prefix is None:
                 if member_name in locals():
                     continue
                 else:
-                    print('MISSING:', member_name + str(inspect.signature(member)) + ':')
+                    if callable(member):
+                        print('MISSING:', member_name + str(inspect.signature(member)) + ':')
+                    else:
+                        print('MISSING:', member_name)
                     print(member.__doc__)
-                    raise NotImplementedError(f"{cls} map not specified for array member {member_name}.  Other members may work if this check is removed.")
-            if hasattr(object, member_name):
-                continue
+                    #raise NotImplementedError(f"{cls} map not specified for array member {member_name}.  Other members may work if this check is removed.")
             elif type(member) is property:
                 exec(compile(inspect.cleandoc(f"""
                     @property
@@ -112,7 +119,7 @@ def guesswrap(filename, mod, cls, **maps):
                        return self._data.{impl_member_name}
                 """), filename, "exec"), locals())
             else:
-                wrap_func(member, 'self._data.' + impl_member_name, filename, locals(), return_wrap_str=Array_name, **maps)
+                wrap_func(member, prefix + impl_member_name, filename, locals(), globals=dict(impl=mod), return_wrap_str=Array_name, **maps)
         del member_name
         del impl_member_name
         del member
