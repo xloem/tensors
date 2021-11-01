@@ -79,6 +79,8 @@ def guesswrap(filename, mod, cls, **maps):
             
 
     outer_scope = locals()
+    class _Empty:
+        pass
     class Array:
         def __init__(self, src):
             if isinstance(src, cls):
@@ -94,7 +96,7 @@ def guesswrap(filename, mod, cls, **maps):
             locals()[member_name] = member
 
         for member_name, impl_member_name, member in member_map_of(arrays_api.Array, public_only = False, **maps):
-            if hasattr(object, member_name):
+            if hasattr(_Empty, member_name):
                 continue
             for test, prefix in (('cls.','self._data.'), ('mod.','impl.'), (None,None)):
                 try:
